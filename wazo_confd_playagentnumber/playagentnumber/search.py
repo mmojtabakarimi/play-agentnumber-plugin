@@ -1,7 +1,7 @@
 from xivo_dao.resources.utils.search import SearchConfig
 from xivo_dao.resources.utils.search import SearchSystem
 
-from .model import PlayagentnumbertModel
+from .model import PlayagentnumbertModel1
 
 playagentnumber_config = SearchConfig(
     table=PlayagentnumbertModel,
