@@ -14,22 +14,22 @@ class Plugin:
         api = dependencies['api']
         playagentnumber_service = build_playagentnumber_service()
 
-        # # Playagentnumbers
-        # api.add_resource(
-        #     PlayagentnumberListResource,
-        #     '/playagentnumbers',
-        #     resource_class_args=(playagentnumber_service,)
-        # )
-        # api.add_resource(
-        #     PlayagentnumberItemResource,
-        #     '/playagentnumbers/<int:uuid>',
-        #     endpoint='playagentnumbers',
-        #     resource_class_args=(playagentnumber_service,)
-        # )
-        # api.add_resource(
-        #     PlayagentnumberInquiryResource,
-        #     '/playagentnumbers/inquiry',
-        #     resource_class_args=(playagentnumber_service,)
-        # )
+        # Playagentnumbers
+        api.add_resource(
+            PlayagentnumberListResource,
+            '/playagentnumbers',
+            resource_class_args=(playagentnumber_service,)
+        )
+        api.add_resource(
+            PlayagentnumberItemResource,
+            '/playagentnumbers/<int:uuid>',
+            endpoint='playagentnumbers',
+            resource_class_args=(playagentnumber_service,)
+        )
+        api.add_resource(
+            PlayagentnumberInquiryResource,
+            '/playagentnumbers/inquiry',
+            resource_class_args=(playagentnumber_service,)
+        )
 
         logger.info('Playagentnumber plugin loaded')

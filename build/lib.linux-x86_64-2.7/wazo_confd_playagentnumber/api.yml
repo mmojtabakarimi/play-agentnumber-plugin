@@ -1,0 +1,77 @@
+paths:
+  /playagentnumber:
+    get:
+      summary: List playagentnumber
+      description: '**Required ACL:** `confd.playagentnumber.read`'
+      tags:
+        - playagentnumber
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+      responses:
+        '200':
+          description: Playagentnumber
+          schema:
+            $ref: '#/definitions/PlayagentnumberItems'
+    post:
+      summary: Create playagentnumber
+      description: '**Required ACL:** `confd.playagentnumber.create`'
+      tags:
+        - playagentnumber
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - name: body
+          in: body
+          description: Playagentnumber to create
+          required: true
+          schema:
+            $ref: '#/definitions/Playagentnumber'
+      responses:
+        '201':
+          description: Playagentnumber list
+          schema:
+            $ref: '#/definitions/Playagentnumber'
+
+parameters:
+  tenantuuid:
+    name: Wazo-Tenant
+    type: string
+    in: header
+    description: "The tenant's UUID, defining the ownership of a given resource."
+    required: false
+  playagentnumberid:
+    required: true
+    type: integer
+    name: playagentnumber_id
+    in: path
+    description: Playagentnumber's ID
+
+definitions:
+  Playagentnumber:
+    title: Playagentnumber
+    allOf:
+      - properties:
+          id:
+            type: integer
+            readOnly: true
+            description: The id of the playagentnumber
+          exten:
+            type: string
+            description: extension
+          blocked_num:
+            type: string
+            description: blocked extension or number
+  PlayagentnumberItems:
+    title: PlayagentnumberItems
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/Playagentnumber'
+      total:
+        type: integer
+    required:
+      - total
+
+
+
+
