@@ -1,0 +1,129 @@
+paths:
+  /blacklists:
+    get:
+      summary: List playagentnumber
+      description: '**Required ACL:** `confd.playagentnumber.read`'
+      tags:
+        - blacklists
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+      responses:
+        '200':
+          description: Blacklist
+          schema:
+            $ref: '#/definitions/BlacklistItems'
+    post:
+      summary: Create playagentnumber
+      description: '**Required ACL:** `confd.playagentnumber.create`'
+      tags:
+        - blacklists
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - name: body
+          in: body
+          description: Blacklist to create
+          required: true
+          schema:
+            $ref: '#/definitions/Blacklist'
+      responses:
+        '201':
+          description: Blacklist list
+          schema:
+            $ref: '#/definitions/Blacklist'
+
+  /blacklists/{blacklist_id}:
+    get:
+      summary: Get Blacklist
+      description: '**Required ACL:** `confd.playagentnumber.{blacklist_id}.read`'
+      tags:
+        - blacklists
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/blacklistid'
+      responses:
+        '200':
+          description: Blacklist
+          schema:
+            $ref: '#/definitions/Blacklist'
+        '404':
+          $ref: '#/responses/NotFoundError'
+    put:
+      summary: Update Blacklist
+      description: '**Required ACL:** `confd.playagentnumber.{blacklist_id}.update`'
+      tags:
+        - blacklists
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/blacklistid'
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Blacklist'
+      responses:
+        '204':
+          $ref: '#/responses/ResourceUpdated'
+        '400':
+          $ref: '#/responses/UpdateError'
+        '404':
+          $ref: '#/responses/NotFoundError'
+    delete:
+      summary: Delete playagentnumber
+      description: '**Required ACL:** `confd.playagentnumber.{blacklist_id}.delete`'
+      tags:
+        - blacklists
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/blacklistid'
+      responses:
+        '204':
+          $ref: '#/responses/ResourceDeleted'
+        '400':
+          $ref: '#/responses/DeleteError'
+        '404':
+          $ref: '#/responses/NotFoundError'
+
+parameters:
+  tenantuuid:
+    name: Wazo-Tenant
+    type: string
+    in: header
+    description: "The tenant's UUID, defining the ownership of a given resource."
+    required: false
+  blacklistid:
+    required: true
+    type: integer
+    name: blacklist_id
+    in: path
+    description: Blacklist's ID
+
+definitions:
+  Blacklist:
+    title: Blacklist
+    allOf:
+      - properties:
+          id:
+            type: integer
+            readOnly: true
+            description: The id of the playagentnumber
+          exten:
+            type: string
+            description: extension
+          blocked_num:
+            type: string
+            description: blocked extension or number
+  BlacklistItems:
+    title: BlacklistItems
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/Blacklist'
+      total:
+        type: integer
+    required:
+      - total
+
+
+
+

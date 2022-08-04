@@ -1,0 +1,5 @@
+name: wazo-confd-playagentnumber
+namespace: connectino
+version: 0.0.1
+author: Mojtaba Karimi
+display_name: Connectino playagentnumber
