@@ -1,7 +1,7 @@
 from wazo_confd import bus, sysconfd
 
 
-class BlacklistNotifier:
+class PlayagentnumberNotifier:
     def __init__(self, bus, sysconfd):
         self.bus = bus
         self.sysconfd = sysconfd
@@ -9,15 +9,15 @@ class BlacklistNotifier:
     def send_sysconfd_handlers(self):
         pass
 
-    def created(self, blacklist):
+    def created(self, playagentnumber):
         pass
 
-    def edited(self, blacklist):
+    def edited(self, playagentnumber):
         pass
 
-    def deleted(self, blacklist):
+    def deleted(self, playagentnumber):
         pass
 
 
-def build_blacklist_notifier():
-    return BlacklistNotifier(bus, sysconfd)
+def build_playagentnumber_notifier():
+    return PlayagentnumberNotifier(bus, sysconfd)

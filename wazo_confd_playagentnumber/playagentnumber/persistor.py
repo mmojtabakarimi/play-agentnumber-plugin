@@ -1,19 +1,19 @@
 from xivo_dao.helpers.persistor import BasePersistor
 from xivo_dao.resources.utils.search import CriteriaBuilderMixin
 
-from .model import BlacklistModel
+from .model import PlayagentnumberModel
 
 
-class BlacklistPersistor(CriteriaBuilderMixin, BasePersistor):
-    _search_table = BlacklistModel
+class PlayagentnumberPersistor(CriteriaBuilderMixin, BasePersistor):
+    _search_table = PlayagentnumberModel
 
-    def __init__(self, session, blacklist_search, tenant_uuids=None):
+    def __init__(self, session, playagentnumber_search, tenant_uuids=None):
         self.session = session
-        self.search_system = blacklist_search
+        self.search_system = playagentnumber_search
         self.tenant_uuids = tenant_uuids
 
     def _find_query(self, criteria):
-        query = self.session.query(BlacklistModel)
+        query = self.session.query(PlayagentnumberModel)
         # query = self._filter_tenant_uuid(query)
         return self.build_criteria(query, criteria)
 
@@ -28,11 +28,11 @@ class BlacklistPersistor(CriteriaBuilderMixin, BasePersistor):
         :return: is blocked
         :rtype: bool
         """
-        blocked_by_tenant = self.session.query(BlacklistModel) \
-            .filter(BlacklistModel.exten.is_(None), BlacklistModel.blocked_num == blocked_num)
+        blocked_by_tenant = self.session.query(PlayagentnumberModel) \
+            .filter(PlayagentnumberModel.exten.is_(None), PlayagentnumberModel.blocked_num == blocked_num)
 
         if tenant_uuid:
-            blocked_by_tenant = blocked_by_tenant.filter(BlacklistModel.tenant_uuid == tenant_uuid)
+            blocked_by_tenant = blocked_by_tenant.filter(PlayagentnumberModel.tenant_uuid == tenant_uuid)
 
         if blocked_by_tenant.count():
             return True
@@ -40,10 +40,10 @@ class BlacklistPersistor(CriteriaBuilderMixin, BasePersistor):
         if not exten:
             return False
 
-        blocked_by_exten = self.session.query(BlacklistModel) \
-            .filter(BlacklistModel.exten == exten, BlacklistModel.blocked_num == blocked_num)
+        blocked_by_exten = self.session.query(PlayagentnumberModel) \
+            .filter(PlayagentnumberModel.exten == exten, PlayagentnumberModel.blocked_num == blocked_num)
 
         if tenant_uuid:
-            blocked_by_exten = blocked_by_exten.filter(BlacklistModel.tenant_uuid == tenant_uuid)
+            blocked_by_exten = blocked_by_exten.filter(PlayagentnumberModel.tenant_uuid == tenant_uuid)
 
         return blocked_by_exten.count() > 0

@@ -1,87 +1,35 @@
 paths:
-  /blacklists:
+  /playagentnumber:
     get:
       summary: List playagentnumber
       description: '**Required ACL:** `confd.playagentnumber.read`'
       tags:
-        - blacklists
+        - playagentnumber
       parameters:
         - $ref: '#/parameters/tenantuuid'
       responses:
         '200':
-          description: Blacklist
+          description: Playagentnumber
           schema:
-            $ref: '#/definitions/BlacklistItems'
+            $ref: '#/definitions/PlayagentnumberItems'
     post:
       summary: Create playagentnumber
       description: '**Required ACL:** `confd.playagentnumber.create`'
       tags:
-        - blacklists
+        - playagentnumber
       parameters:
         - $ref: '#/parameters/tenantuuid'
         - name: body
           in: body
-          description: Blacklist to create
+          description: Playagentnumber to create
           required: true
           schema:
-            $ref: '#/definitions/Blacklist'
+            $ref: '#/definitions/Playagentnumber'
       responses:
         '201':
-          description: Blacklist list
+          description: Playagentnumber list
           schema:
-            $ref: '#/definitions/Blacklist'
-
-  /blacklists/{blacklist_id}:
-    get:
-      summary: Get Blacklist
-      description: '**Required ACL:** `confd.playagentnumber.{blacklist_id}.read`'
-      tags:
-        - blacklists
-      parameters:
-        - $ref: '#/parameters/tenantuuid'
-        - $ref: '#/parameters/blacklistid'
-      responses:
-        '200':
-          description: Blacklist
-          schema:
-            $ref: '#/definitions/Blacklist'
-        '404':
-          $ref: '#/responses/NotFoundError'
-    put:
-      summary: Update Blacklist
-      description: '**Required ACL:** `confd.playagentnumber.{blacklist_id}.update`'
-      tags:
-        - blacklists
-      parameters:
-        - $ref: '#/parameters/tenantuuid'
-        - $ref: '#/parameters/blacklistid'
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Blacklist'
-      responses:
-        '204':
-          $ref: '#/responses/ResourceUpdated'
-        '400':
-          $ref: '#/responses/UpdateError'
-        '404':
-          $ref: '#/responses/NotFoundError'
-    delete:
-      summary: Delete playagentnumber
-      description: '**Required ACL:** `confd.playagentnumber.{blacklist_id}.delete`'
-      tags:
-        - blacklists
-      parameters:
-        - $ref: '#/parameters/tenantuuid'
-        - $ref: '#/parameters/blacklistid'
-      responses:
-        '204':
-          $ref: '#/responses/ResourceDeleted'
-        '400':
-          $ref: '#/responses/DeleteError'
-        '404':
-          $ref: '#/responses/NotFoundError'
+            $ref: '#/definitions/Playagentnumber'
 
 parameters:
   tenantuuid:
@@ -90,16 +38,16 @@ parameters:
     in: header
     description: "The tenant's UUID, defining the ownership of a given resource."
     required: false
-  blacklistid:
+  playagentnumberid:
     required: true
     type: integer
-    name: blacklist_id
+    name: playagentnumber_id
     in: path
-    description: Blacklist's ID
+    description: Playagentnumber's ID
 
 definitions:
-  Blacklist:
-    title: Blacklist
+  Playagentnumber:
+    title: Playagentnumber
     allOf:
       - properties:
           id:
@@ -112,13 +60,13 @@ definitions:
           blocked_num:
             type: string
             description: blocked extension or number
-  BlacklistItems:
-    title: BlacklistItems
+  PlayagentnumberItems:
+    title: PlayagentnumberItems
     properties:
       items:
         type: array
         items:
-          $ref: '#/definitions/Blacklist'
+          $ref: '#/definitions/Playagentnumber'
       total:
         type: integer
     required:
