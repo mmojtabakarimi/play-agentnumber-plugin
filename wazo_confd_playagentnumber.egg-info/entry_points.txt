@@ -1,3 +1,0 @@
-[wazo_confd.plugins]
-playagentnumber = wazo_confd_playagentnumber.plugin:Plugin
-
